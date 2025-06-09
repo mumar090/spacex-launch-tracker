@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "spacex-launch-tracker"
+version = "0.1.0"
+description = "spacex api"
+authors = ["Muhammad Umar"]
+readme = "README.md"
+packages = [
+    { include = "backend" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.1"
+uvicorn = "^0.34.2"
+pydantic = "^2.11.3"
+pydantic-settings = "^2.1.0"
+fastapi-cache2 = "^0.2.2"
+pytest-asyncio = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+httpx = "^0.28.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
