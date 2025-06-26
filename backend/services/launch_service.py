@@ -3,7 +3,7 @@ from typing import List, Dict, Optional
 from fastapi import HTTPException
 from fastapi_cache.decorator import cache
 from collections import defaultdict
-from datetime import datetime
+from datetime import date
 
 
 from backend.models.models import Launch, Rocket, Launchpad
@@ -50,8 +50,8 @@ class SpaceXService:
     
     async def filter_launches(
         self,
-        start_date: Optional[str] = None,
-        end_date: Optional[str] = None,
+        start_date: Optional[date] = None,
+        end_date: Optional[date] = None,
         rocket_name: Optional[str] = None,
         success: Optional[bool] = None,
         launchpad_name: Optional[str] = None,
