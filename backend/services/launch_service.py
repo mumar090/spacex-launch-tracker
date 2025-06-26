@@ -3,6 +3,7 @@ from typing import List, Dict, Optional
 from fastapi import HTTPException
 from fastapi_cache.decorator import cache
 from collections import defaultdict
+from datetime import datetime
 
 
 from backend.models.models import Launch, Rocket, Launchpad
@@ -60,6 +61,10 @@ class SpaceXService:
         rockets = await self.fetch_rockets()
         launchpads = await self.fetch_launchpads()
 
+        # Validate date range
+        if start_date and end_date and start_date > end_date:
+            raise HTTPException(status_code=400, detail="Start date cannot be after end date.")
+
         if start_date:
             launches = [l for l in launches if l.date_utc.date() >= start_date]
 
@@ -74,7 +79,7 @@ class SpaceXService:
             launches = [l for l in launches if l.success == success]
 
         if launchpad_name:
-            launchpad_ids = [p.id for p in launchpads if p.name == launchpad_name]
+            launchpad_ids = [lp.id for lp in launchpads if lp.name.lower() == launchpad_name.lower()]
             launches = [l for l in launches if l.launchpad in launchpad_ids]
 
         return launches

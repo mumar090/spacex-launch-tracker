@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, Dict, List
 from datetime import date, datetime
+from fastapi import Query
 
 class Launch(BaseModel):
     id: str
@@ -24,11 +25,11 @@ class Launchpad(BaseModel):
     launch_attempts: Optional[int] = None
 
 class LaunchFilterRequest(BaseModel):
-    start_date: Optional[date] = None
-    end_date: Optional[date] = None
-    rocket_name: Optional[str] = None
-    success: Optional[bool] = None
-    launchpad_name: Optional[str] = None
+    start_date: Optional[date] = Query(None, description="Filter launches after this date (YYYY-MM-DD)")
+    end_date: Optional[date] = Query(None, description="Filter launches before this date (YYYY-MM-DD)")
+    rocket_name: Optional[str] = Query(None, description="Name of the rocket")
+    success: Optional[bool] = Query(None, description="Success status of the launch")
+    launchpad_name: Optional[str] = Query(None, description="Name of the launchpad")
 
 class LaunchFrequency(BaseModel):
     monthly: Dict[str, int]

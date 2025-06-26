@@ -1,6 +1,5 @@
 import pytest
 from unittest.mock import AsyncMock, patch
-from unittest.mock import AsyncMock, patch
 from datetime import datetime
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
